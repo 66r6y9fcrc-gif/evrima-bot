@@ -210,10 +210,24 @@ export const OPCodes = {
  */
 export async function runRconCommand(config, opcode, ...args) {
   const rcon = new EvrimaRcon(config);
+  const hardTimeoutMs = (config.hardTimeoutMs ?? 15000);
+  let timer;
   try {
-    await rcon.connect();
-    return await rcon.send(opcode, ...args);
+    const result = await Promise.race([
+      (async () => {
+        await rcon.connect();
+        return await rcon.send(opcode, ...args);
+      })(),
+      new Promise((_, reject) => {
+        timer = setTimeout(
+          () => reject(new Error(`RCON hart Timeout nach ${hardTimeoutMs}ms`)),
+          hardTimeoutMs
+        );
+      }),
+    ]);
+    return result;
   } finally {
+    if (timer) clearTimeout(timer);
     rcon.close();
   }
 }
