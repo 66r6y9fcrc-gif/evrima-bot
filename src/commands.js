@@ -10,11 +10,11 @@ import { runRconCommand } from "./rcon.js";
  */
 
 export const commands = [
-  new SlashCommandBuilder
+  new SlashCommandBuilder()
     .setName("status")
     .setDescription("Zeigt Server-Status und Spielerliste an"),
 
-  new SlashCommandBuilder
+  new SlashCommandBuilder()
     .setName("spieler")
     .setDescription("Zeigt Dino-Daten eines Spielers an (Klasse, Growth, HP, Position)")
     .addStringOption((o) =>
@@ -24,7 +24,7 @@ export const commands = [
         .setRequired(true)
     ),
 
-  new SlashCommandBuilder
+  new SlashCommandBuilder()
     .setName("farbe")
     .setDescription("Setzt die Dino-Farbe (benötigt Dino-Colour-Command Mod)")
     .addStringOption((o) =>
@@ -51,25 +51,25 @@ export const commands = [
         .setRequired(true)
     ),
 
-  new SlashCommandBuilder
+  new SlashCommandBuilder()
     .setName("dinos")
     .setDescription("Listet die Dinos eines Spielers auf (Extended RCON Mod)")
     .addStringOption((o) =>
       o.setName("steamid").setDescription("SteamID64").setRequired(true)
     ),
 
-  new SlashCommandBuilder
+  new SlashCommandBuilder()
     .setName("announce")
     .setDescription("Sendet eine Server-Ankündigung an alle Spieler")
     .addStringOption((o) =>
       o.setName("text").setDescription("Nachricht").setRequired(true)
     ),
 
-  new SlashCommandBuilder
+  new SlashCommandBuilder()
     .setName("save")
     .setDescription("Erzwingt ein Server-Save"),
 
-  new SlashCommandBuilder
+  new SlashCommandBuilder()
     .setName("hilfe")
     .setDescription("Zeigt alle Befehle und Setup-Infos"),
 ];
