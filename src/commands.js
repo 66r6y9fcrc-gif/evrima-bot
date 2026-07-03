@@ -117,8 +117,9 @@ export async function handleFarbe(interaction, cfg) {
   const region = interaction.options.getString("region");
   const farbe = interaction.options.getString("farbe");
   try {
-    // Syntax hängt von der Dino-Colour-Command Mod ab: <SteamID>,<Region>,<Farbe>
-    const res = await runRconCommand(cfg, "setdinocolor", steamid, region, farbe);
+    // Dino-Colour-Command Mod (custom-Befehl). Syntax hängt von der Mod ab,
+    // typisch: "SetDinoColor <steamid> <region> <color>"
+    const res = await runRconCommand(cfg, "setdinocolor", `SetDinoColor ${steamid} ${region} ${farbe}`);
     const embed = new EmbedBuilder()
       .setTitle("🎨 Dino-Farbe gesetzt")
       .setColor(0xe67e22)
@@ -139,11 +140,12 @@ export async function handleDinos(interaction, cfg) {
   await interaction.deferReply();
   const steamid = interaction.options.getString("steamid");
   try {
-    const data = await runRconCommand(cfg, "listplayerdinos", steamid);
+    // Extended RCON 'custom'-Befehl: "ListPlayerDinos <steamid>"
+    const res = await runRconCommand(cfg, "listplayerdinos", `ListPlayerDinos ${steamid}`);
     const embed = new EmbedBuilder()
       .setTitle(`🦕 Dinos von ${steamid}`)
       .setColor(0x9b59b6)
-      .setDescription(truncate(data, 4096) || "Keine Dinos gefunden.")
+      .setDescription(truncate(res, 4096) || "Keine Dinos gefunden.")
       .setTimestamp();
     await interaction.editReply({ embeds: [embed] });
   } catch (err) {
