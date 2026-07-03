@@ -1,0 +1,19 @@
+{
+  "name": "evrima-discord-bot",
+  "version": "1.0.0",
+  "description": "Discord-Bot für The Isle Evrima-Server über RCON (läuft auf Raspberry Pi 3)",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "register": "node src/register.js",
+    "dev": "node --watch src/index.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "discord.js": "^14.16.3",
+    "dotenv": "^16.4.5"
+  }
+}

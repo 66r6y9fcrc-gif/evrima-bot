@@ -1,0 +1,20 @@
+[Unit]
+Description=The Isle Evrima Discord Bot
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=pi
+WorkingDirectory=/home/pi/evrima-bot
+ExecStart=/usr/bin/node /home/pi/evrima-bot/src/index.js
+Restart=always
+RestartSec=5
+# Umgebung laden
+EnvironmentFile=/home/pi/evrima-bot/.env
+# SD-Karte schonen: Logs ins Journal, nicht in Datei
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
